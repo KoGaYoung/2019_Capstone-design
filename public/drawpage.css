@@ -1,8 +1,10 @@
 .wrapper{
   display: table;
-  width:480px;
+  width:307.64px;
   height:540px;
   border: 1px solid #797979;
+
+  background-color:#F0F0F0;
 }
 
 .recommend{
@@ -32,37 +34,35 @@
 
 .image_container{
   display: table-cell;
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
   text-align: center;
   border: 1px solid #797979;
 }
 
 .image_container img{
-  width: 160px;
-  height: 160Spx;
+  width: 100px;
+  height: 100px;
 }
 
 .draw{
   width:100%;
   height:352.5px;
-  background-color:#F0F0F0;
+  background-color:#ffffff;
   position:relative;
 }
 
 .buttons{
   display: table-row;
-  position:absolute;
-  bottom:0px;
-  right:0px;
-  border-spacing: 15px 0px;
-  margin-bottom: 20px;
+  position:relative;
+  float: right;
+  border-spacing: 15px 15px;
 }
 
 .buttons > div{
   display: table-cell;
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
   background-color: #FFFFFF;
   border-radius: 50%;
   border: 1px solid #797979;
