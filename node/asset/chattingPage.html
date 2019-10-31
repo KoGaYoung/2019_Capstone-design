@@ -8,11 +8,12 @@
 
   <body>
     <div class="backgroundDiv">
+
       <div class="headerDiv">
         <div class="logoDiv" />
         <p class="headerText">Skatch-based chat</p>
       </div>
-      </div>
+
 
       <div class="containerDiv">
         배경
@@ -28,61 +29,75 @@
           <input id="name" class="name" type="text" value="이름" readonly>
           <input id="message" class="message" type="text" placeholder="메시지를 입력하세요.">
           <button class="chat" onclick="send()">전송</button>
-          <a class="skatchStart" href ="/draw"></a>
+          <input type="button" class="skatchStart" onClick="showPopUp()"/>
         </div>
-        <div id="box" class="box">
-
-          <!-- <div class="draw">
-
-            <canvas id="canvas" width="300px" height="300px"style="border: 1px solid black;"></canvas>
-            <div class="buttons">
-              <div class="send">send</div>
-                <button id="trash_b"onclick="clearCanvas()">delete</button>
-              <div class="cancel">cancel</div>
-            </div>
-          </div>
-        </div> -->
-        <div>
-
-          <div class='image_container'>
-            <img id ="recommend1" src="./css/photoPlus.png" onclick = "click_recommand('recommend1')" style="width: 100px; height : 100px; ">
-          </div>
-          <div class='image_container'>
-            <img id ="recommend2" src="./css/photoPlus.png" onclick = "click_recommand('recommend2')" style="width: 100px; height : 100px;">
-          </div>
-          <div class='image_container'>
-            <img id ="recommend3" src="./css/photoPlus.png" onclick = "click_recommand('recommend3')" style="width: 100px; height : 100px;">
-          </div>
-
-        </div>
-
-        <div>
-            <canvas id="cnvs" width="500" height="500" style="border: 1px solid black;"></canvas>
-            <br/>
-            <div>
-              <button  onclick="sendImg()">send</button>
-              <button id ="btnDel">delete</button>
-            </div>
-        </div>
-
       </div>
+             <div id = "side" class='wrapper' style="visibility= hidden;">
+                <div class='top'>
+                    <div class='recommend'>
+                      <div class="text_recommend">
+                        Recommend
+                      </div>
+                    </div>
+
+                    <div class="image_table">
+                      <div class='image_container'> Recommend1
+                        <img id= "recommend_1" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+                      </div>
+                      <div class='image_container'> Recommend2
+                        <img id= "recommend_2" src="./css/photoPlus.png" onclick="focus_img('recommend_2')">
+                      </div>
+                      <div class='image_container'> Recommend3
+                        <img id= "recommend_3" src="./css/camera.png" onclick="focus_img('recommend_3')">
+                      </div>
+                    </div>
+                </div>
+                <div class="draw">
+                  <!-- canvas -->
+                  <canvas id="cnvs" width="480px" height="364px"></canvas>
+                  <div class="buttons">
+                    <button  class="send" onclick="sendImg('recommend_1')">send</button>
+                    <button id= "btnDel" class="cancel">cancel</button>
+                    <!-- <div class="cancel">cancel</div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
 
           <script src = "/socket.io/socket.io.js"></script>
           <script src="//code.jquery.com/jquery-1.11.1.js"></script>
           <script>
+          function imge_to_canvas(recommend_id){
 
-          function click_recommand(recommend_id){
-
-            alert("xxxx")
             var cnvs = document.getElementById('cnvs');
             var img = document.getElementById(recommend_id);
             var ctx = cnvs.getContext('2d');
-            ctx.drawImage(img, 10, 10);
-          }
 
+              ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+              ctx.drawImage(img, cnvs.width/2-img.width/2, cnvs.height/2-img.height/2);
+
+          }
+          function click_recommend(recommend_id){
+
+
+
+
+
+          }
+          function showPopUp(){
+            var ifram = document.getElementById('side');
+            if(ifram.style.visibility=='hidden'){
+              ifram.style.visibility = 'visible';
+            }else{
+              ifram.style.visibility='hidden';
+            }
+          }
           </script>
 
           <script>
+          //클라이언트 코드
           var socket = io()
 
           /* 접속 되었을 때 실행 */
@@ -148,17 +163,33 @@
           })
 
 
+          // 추천 이미지 클릭시 변수에 id 값을 저장하여 send시 저장된 id의 이미즈를 채팅으로 전달한다.
+          //img_id default = recommend_1
+          let img_id = 'recommend_1';
 
+          function focus_img(recommend_img){
+            //추천 이미지 클릭시 선택한 이미지 id 저장
+
+            if(recommend_img != img_id){
+              var focus_img = document.getElementById(img_id);
+              focus_img.style.opacity = 1;
+            }
+            var focus_img = document.getElementById(recommend_img);
+            focus_img.style.opacity = 0.5;
+            img_id = recommend_img;
+
+
+          }
 
           function sendImg() {
           // 입력되어있는 데이터 가져오기
-          var image_canvas = document.getElementById('cnvs')
-          var image =  cnvs.toDataURL()
-
+          // var image_canvas = document.getElementById('cnvs')
+          // var image =  cnvs.toDataURL()
+          var image = document.getElementById(img_id)
           var x =  document.createElement("IMG");
-          x.setAttribute("src", image);
-          x.setAttribute("width", "150");
-          x.setAttribute("height", "150");
+          x.setAttribute("src", image.src);
+          x.setAttribute("width", "100");
+          x.setAttribute("height", "100");
 
           // 가져왔으니 데이터 빈칸으로 변경
           // 내가 전송할 메시지 클라이언트에게 표시
@@ -198,14 +229,16 @@
 
         <script>
 
+        // 그림판 코드
         $(document).ready(function(){
             // canvas
             var cnvs = document.getElementById('cnvs');
+            var ctx = cnvs.getContext('2d');
+
             // canvas 사용가능
             if (cnvs.getContext) {
                 // 캔버스 컨텍스트
-                var ctx = cnvs.getContext('2d');
-                ctx.fillStyle = 'rgb(255, 255, 255)';
+                ctx.fillStyle = '#f0f0f0';
                 ctx.fillRect(0, 0, cnvs.width, cnvs.height);
                 // 그리기 모드인지 체크하는 변수
                 var isDraw = false;
@@ -235,13 +268,13 @@
                     // 버튼 up 이면 그릴 수 없다고 선언
                     // 지금 까지 그린 canvas data convert image data and send socket
                     isDraw = false;
+                    ctx.beginPath();
                     // var imgDataTest = ctx.createImageData(cnvs.width, cnvs.height);
                     // var image = new Image();
                     // image.src = cnvs.toDataURL('image/png');
                     // var image = cnvs.toDataURL("image/png").replace("image/png", "image/octet-stream");
                     // window.location.href=image;
                     var image = cnvs.toDataURL("image/png")
-                    image.download
                     // sendImg()
 
                 });
@@ -262,7 +295,6 @@
                     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
                     ctx.beginPath();
 
-                    localStorage.removeItem('imgData');
                 }
                 $("#btnDel").click(function(){ clearCanvas()});
 
@@ -273,8 +305,8 @@
             }
 
         });
-        </script>
 
+        </script>
   </body>
 
 </html>
