@@ -29,22 +29,27 @@ function make_option(data){
 
     pythonOptions: ['-u'],
 
-    scriptPath: './image_predict',
+    // scriptPath: 'node/image_predict',
+    scriptPath: '/image_predict',
 
     args: [data]
   }
   return option;
 }
 
+// app.use('/css', express.static('node/asset/css'))
+// app.use('/js', express.static('node/asset/js'))
+// app.use('/data', express.static('node/asset/data'))
 
-
+원래꺼
 app.use('/css', express.static('./asset/css'))
 app.use('/js', express.static('./asset/js'))
 app.use('/data', express.static('./asset/data'))
 
 /* Get 방식으로 / 경로에 접속하면 실행 됨 */
 app.get('/', function(request, response) {
-  fs.readFile('./asset/chattingPage.html', function(err, data) {
+  // fs.readFile('node/asset/chattingPage.html', function(err, data) {
+      fs.readFile('./asset/chattingPage.html', function(err, data) { //원래꺼
     if(err) {
       response.send('에러')
     } else {
@@ -55,7 +60,8 @@ app.get('/', function(request, response) {
   })
 })
 app.get('/draw', function(request, response) {
-  fs.readFile('./asset/draw.html', function(err, data) {
+  // fs.readFile('node/asset/draw.html', function(err, data) {
+    fs.readFile('./asset/draw.html', function(err, data) {
     if(err) {
       response.send('에러')
     } else {

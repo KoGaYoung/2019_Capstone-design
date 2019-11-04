@@ -1,4 +1,4 @@
-Ww<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
   <head>
@@ -7,62 +7,84 @@ Ww<!DOCTYPE html>
   </head>
 
   <body>
+    <div class="itemsDiv">
     <div class="backgroundDiv">
 
       <div class="headerDiv">
-        <div class="logoDiv" />
-        <p class="headerText">Skatch-based chat</p>
+        <img class="logoDiv" src="./css/conversationLogo.png" ></img>
+        <p class="headerText">Sketch-Based Chat</p>
       </div>
 
 
       <div class="containerDiv">
-        배경
         <!--채팅로그-->
         <!-- <textarea id="chatLog" class="chat_Log" readonly></textarea> -->
-        <div id="chatLog" class="chat_Log"style="overflow:scroll";>
+        <div id="chatLog" class="chat_Log">
           <!-- 채팅 메시지 영역 -->
           <!-- 텍스트 및 이미지가 올라감 -->
-
         </div>
 
         <div class="chatFormat" id="chat">
-          <input id="name" class="name" type="text" value="이름" readonly>
-          <input id="message" class="message" type="text" placeholder="메시지를 입력하세요.">
+          <input id="message" class="message" type="text" placeholder=" 메시지를 입력하세요.">
           <button class="chat" onclick="send()">전송</button>
           <input type="button" class="skatchStart" onClick="showPopUp()"/>
         </div>
       </div>
-             <div id = "side" class='wrapper' style="visibility= hidden;">
-                <div class='top'>
-                    <div class='recommend'>
-                      <div class="text_recommend">
-                        Recommend
-                      </div>
-                    </div>
+    </div>
+    <div id = "side" class='wrapper' style="visibility= hidden;">
+         <div class='top'>
+             <div class='recommend'>
+               <div class="text_recommend">
+                 Recommend
+               </div>
+             </div>
 
-                    <div class="image_table">
-                      <div class='image_container'> Recommend1
-                        <img id= "recommend_1" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-                      </div>
-                      <div class='image_container'> Recommend2
-                        <img id= "recommend_2" src="./css/photoPlus.png" onclick="focus_img('recommend_2')">
-                      </div>
-                      <div class='image_container'> Recommend3
-                        <img id= "recommend_3" src="./css/camera.png" onclick="focus_img('recommend_3')">
-                      </div>
-                    </div>
-                </div>
-                <div class="draw">
-                  <!-- canvas -->
-                  <canvas id="cnvs" width="480px" height="364px"></canvas>
-                  <div class="buttons">
-                    <button  class="send" onclick="sendImg('recommend_1')">send</button>
-                    <button id= "btnDel" class="cancel">cancel</button>
-                    <!-- <div class="cancel">cancel</div> -->
-                  </div>
-                </div>
-              </div>
-            </div>
+             <div class="image_table">
+               <div class='image_container'>
+                 <img id= "recommend_1" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_2" src="./css/conversationLogo.png" onclick="focus_img('recommend_2')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_3" src="./css/conversationLogo.png" onclick="focus_img('recommend_3')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_4" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_5" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_6" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_7" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_8" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_9" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_10" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+             </div>
+         </div>
+
+         <div class="draw">
+               <!-- canvas -->
+           <canvas id="cnvs" width="550px" height="420px"></canvas>
+         </div>
+
+         <div class="buttons">
+           <button  id= "btnDel" class="cancel">cancel</button>
+           <button  class="send" onclick="sendImg('recommend_1')">send</button>
+               <!-- <div class="cancel">cancel</div> -->
+         </div>
+     </div>
+  </div>
 
 
 
@@ -121,8 +143,8 @@ Ww<!DOCTYPE html>
           var chat = document.getElementById('chatLog')
           var user_name = document.getElementById('name')
           var message = document.createElement('div')
-          var br = document.createElement("br");
-         
+          // var br = document.createElement('\n');
+
           //image 전달할경우
           if(data.type == 'image'){
             var node =  document.createElement("IMG");
@@ -160,7 +182,7 @@ Ww<!DOCTYPE html>
           message.appendChild(node)
 
           chat.appendChild(message)
-          chat.appendChild(br)
+          // chat.appendChild('\n')
 
           })
 
@@ -211,24 +233,35 @@ Ww<!DOCTYPE html>
           socket.emit('image', { type: 'image',  buffer: send_img.src})
           }
 
+          //enter로 채팅 전송하는 함수
+         document.getElementById('message').addEventListener('keydown',function(event){
+           if(event.keyCode == 13 && document.getElementById('message').value !=""){
+             event.preventDefault();
+             send();
+           }
+         });
+
+
           /* 메시지 전송 함수 */
           function send() {
           // 입력되어있는 데이터 가져오기
           var message = document.getElementById('message').value
+          if(document.getElementById('message').value !=""){
+            // 내가 전송할 메시지 클라이언트에게 표시
+            var chat = document.getElementById('chatLog')
+            var msg = document.createElement('div')
+            var node = document.createTextNode(message)
+            msg.classList.add('me')
+            msg.appendChild(node)
+            chat.appendChild(msg)
 
+            // 서버로 message 이벤트 전달 + 데이터와 함께
+            socket.emit('message', {type: 'message', message: message})
+
+          }
           // 가져왔으니 데이터 빈칸으로 변경
           document.getElementById('message').value = ''
 
-          // 내가 전송할 메시지 클라이언트에게 표시
-          var chat = document.getElementById('chatLog')
-          var msg = document.createElement('div')
-          var node = document.createTextNode(message)
-          msg.classList.add('me')
-          msg.appendChild(node)
-          chat.appendChild(msg)
-
-          // 서버로 message 이벤트 전달 + 데이터와 함께
-          socket.emit('message', {type: 'message', message: message})
           }
 
           function draw_end(data_url){
