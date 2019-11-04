@@ -18,17 +18,34 @@ const server = http.createServer(app)
 
 /* 생성된 서버를 socket.io에 바인딩 */
 const io = socket(server)
-app.use('/css', express.static('node/asset/css'))
-app.use('/js', express.static('node/asset/js'))
-//
-// app.use('/css', express.static('./asset/css'))
-// app.use('/js', express.static('./asset/js'))
+var {PythonShell} = require('python-shell');
+
+
+function make_option(data){
+  var option = {
+    mode: 'text',
+
+    pythonPath: '',
+
+    pythonOptions: ['-u'],
+
+    scriptPath: './image_predict',
+
+    args: [data]
+  }
+  return option;
+}
+
+
+
+app.use('/css', express.static('./asset/css'))
+app.use('/js', express.static('./asset/js'))
+app.use('/data', express.static('./asset/data'))
+
 /* Get 방식으로 / 경로에 접속하면 실행 됨 */
 app.get('/', function(request, response) {
-  fs.readFile('node/asset/chattingPage.html', function(err, data) {
-    // fs.readFile('./asset/chattingPage.html', function(err, data) {
+  fs.readFile('./asset/chattingPage.html', function(err, data) {
     if(err) {
-      console.log(err);
       response.send('에러')
     } else {
       response.writeHead(200, {'Content-Type':'text/html'})
@@ -67,9 +84,7 @@ io.sockets.on('connection', function(socket) {
   socket.on('message', function(data) {
     /* 받은 데이터에 누가 보냈는지 이름을 추가 */
     data.name = socket.name
-
     console.log(data)
-
     /* 보낸 사람을 제외한 나머지 유저에게 메시지 전송 */
     socket.broadcast.emit('update', data);
   })
@@ -84,6 +99,22 @@ io.sockets.on('connection', function(socket) {
 
     /* 보낸 사람을 제외한 나머지 유저에게 메시지 전송 */
     socket.broadcast.emit('update', data);
+  })
+  socket.on('recommend', function(data) {
+    /* 받은 데이터에 누가 보냈는지 이름을 추가 */
+    data.name = socket.name
+
+    console.log(data)
+
+    var options = make_option(data.buffer)
+
+    PythonShell.run('image_predict.py', options, function (err, results) {
+      if (err) throw err;
+      console.log('results: %j', results);
+      var img_list = Object.values(results)
+      socket.emit('update_re', img_list[1]);
+    });
+
   })
   /* 접속 종료 */
   socket.on('disconnect', function() {
