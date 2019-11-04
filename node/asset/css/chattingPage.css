@@ -214,20 +214,20 @@
 
 .image_container{
   display: table-cell;
-  width: 55px;
-  height: 55px;
+  width: 10%;
+  height: 10%;
   text-align: center;
   border-bottom: 1px solid #797979;
 }
 
 .image_container img{
-  width: 55px;
-   height: 55px;
+  width: 100%;
+   height: 100%;
 }
 
 .draw{
-  width: 550px;
-   height: 450px;
+  width: 100%;
+   height: 420px;
    /* background-color:#ffffff; */
    position:relative;
 }
@@ -236,20 +236,18 @@
   border-top: 1px solid #797979;
   height: 20%;
   background-color: #9bbbd4;
-  display: table-footer-group;
-   /* margin-top: -20px; */
+  display:table-row;
 }
 .cancel, .send{
   float:right;
-  /* padding-top: 5%; */
   width: 12%;
-  /* height: 80%; */
+  height: 80%;
   color: #ffffff;
   background-color: #BBBBBB;
   border: 1px solid #797979;
   border-radius: 6px;
-  font-size: 1.2vw;
-  /* margin-top: 1%; */
+  font-size: 1vw;
+  margin-top: 1%;
   margin-right: 2%;
 }
 
