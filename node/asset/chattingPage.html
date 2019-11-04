@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ww<!DOCTYPE html>
 <html>
 
   <head>
@@ -121,7 +121,8 @@
           var chat = document.getElementById('chatLog')
           var user_name = document.getElementById('name')
           var message = document.createElement('div')
-
+          var br = document.createElement("br");
+         
           //image 전달할경우
           if(data.type == 'image'){
             var node =  document.createElement("IMG");
@@ -157,7 +158,9 @@
 
           message.classList.add(className)
           message.appendChild(node)
+
           chat.appendChild(message)
+          chat.appendChild(br)
 
           })
 
