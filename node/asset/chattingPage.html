@@ -25,7 +25,7 @@
         </div>
 
         <div class="chatFormat" id="chat">
-          <input id="message" class="message" type="text" placeholder=" 메시지를 입력하세요.">
+          <input id="message" class="message" type="text" placeholder=" 메시지를 입력하세요." autocomplete="off"/ >
           <button class="chat" onclick="send()">전송</button>
           <input type="button" class="skatchStart" onClick="showPopUp()"/>
         </div>
@@ -229,6 +229,8 @@
           msg.classList.add('me')
           msg.appendChild(send_img)
           chat.appendChild(msg)
+          // var br = document.createElement("br");
+          // chat.appendChild(br)
           // 서버로 message 이벤트 전달 + 데이터와 함께
           socket.emit('image', { type: 'image',  buffer: send_img.src})
           }
@@ -251,9 +253,11 @@
             var chat = document.getElementById('chatLog')
             var msg = document.createElement('div')
             var node = document.createTextNode(message)
+            // var br = document.createElement("br");
             msg.classList.add('me')
             msg.appendChild(node)
             chat.appendChild(msg)
+            // chat.appendChild(br)
 
             // 서버로 message 이벤트 전달 + 데이터와 함께
             socket.emit('message', {type: 'message', message: message})

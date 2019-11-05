@@ -1,6 +1,6 @@
 /*-------------layout---------------*/
 .itemsDiv{
-  height: 800px;
+  height: 900px;
   display: flex; /*chat and draw 수평 쌓기*/
   align-items: center; /*수직정렬*/
   justify-content: center; /*수평정렬*/
@@ -52,7 +52,7 @@
   box-shadow:3px 3px 3px 2px #bcbcbc;/*수평오프셋, 수직오프셋, 흐림세기, 퍼짐정도*/
   overflow-y:auto; /*채팅 일정이상 쌓이면 스크롤바*/
   overflow-x: hidden; /*좌우 스크롤 안보이게*/
-  min-width: 350px;
+  /* min-width: 350px; */
 }
 
 /*스크롤바*/
@@ -258,6 +258,11 @@
   }
   .chat_Log{
       float: none;
-      width: auto;
     }
+}
+@media (max-width: 550px){
+  .wrapper{
+    width: auto;
+    height: auto;
+  }
 }
