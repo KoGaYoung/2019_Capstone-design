@@ -95,6 +95,7 @@
   border-radius: 6px;
   font-size: 1.2vw;
   margin-left: 2%;
+<<<<<<< HEAD
 }
 /*캔버스 열고닫기 버튼*/
 .skatchStart{
@@ -214,8 +215,13 @@
 
 .image_container{
   display: table-cell;
+<<<<<<< HEAD
   width: 10%;
   height: 10%;
+=======
+  width: 55px;
+  height: 55px;
+>>>>>>> origin/dev_heo
   text-align: center;
   border-bottom: 1px solid #797979;
 }
@@ -250,7 +256,14 @@
   margin-top: 1%;
   margin-right: 2%;
 }
+<<<<<<< HEAD
 
+=======
+.msg_wrapper {
+  display : block;
+  width : 100%;
+}
+>>>>>>> origin/dev_heo
 @media (max-width: 880px){
   .backgroundDiv{
     width: auto;
