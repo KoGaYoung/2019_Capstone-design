@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"></meta>
+  <link rel="stylesheet" type="text/css" href="../public/chattingPage.css">
+  <title>chatting Page</title>
+</head>
+
+<body>
+
+  <div class="backgroundDiv">
+
+    <!--header-->
+    <div class="headerDiv">
+      <img class="logoDiv" src="../public/conversationLogo.png"></img>
+      <!-- <div class="logoDiv"></div> -->
+      <p class="headerText">Skatch-based Chat</p>
+    </div>
+
+    <!--body-->
+    <div class="containerDiv">
+      <!--채팅로그-->
+      <div id="chatLog" class="chat_Log"  readonly></div>
+
+      <form class="chatFormat" id="chat">
+        <input id="name" class="name" type="text" >
+        <input id="message" class="message" type="text" placeholder="메시지를 입력하세요.">
+        <input type="submit" class="chat" value="Send"/>
+        <input type="button" class="skatchStart" onClick="showPopUp()"/>
+      </form>
+
+      <div id="box" class="box">
+        <script src = "/socket.io/socket.io.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+
+      </div>
+    </div>
+
+  </div>
+
+      <div id = "side" class='wrapper' style="visibility= hidden;">
+         <div class='top'>
+             <div class='recommend'>
+               <div class="text_recommend">
+                 Recommend
+               </div>
+             </div>
+
+             <div class="image_table">
+               <div class='image_container'> Recommend1
+                 <!-- <img src="resource/test_image1.png"> -->
+               </div>
+               <div class='image_container'> Recommend2
+                 <!-- <img src="resource/test_image2.png"> -->
+               </div>
+               <div class='image_container'> Recommend3
+                 <!-- <img src="resource/test_image3.png"> -->
+               </div>
+             </div>
+         </div>
+         <div class="draw">
+           <!-- canvas -->
+           <canvas id="canvas" width="480px" height="364px"></canvas>
+           <div class="buttons">
+             <div class="send">send</div>
+             <div class="cancel">cancel</div>
+
+
+           </div>
+         </div>
+
+       </div>
+         <script src = "/socket.io/socket.io.js"></script>
+
+         <script>
+         var pos = {
+           drawable: false,
+           x: -1,
+           y: -1
+         };
+         var canvas, ctx;
+
+         window.onload = function() {
+           canvas = document.getElementById("canvas");
+           trash_button = document.getElementById("trash_b");
+           ctx = canvas.getContext("2d");
+         trash_button.click(function(){ clearCanvas()})
+           // event type
+           canvas.addEventListener("mousedown", listener);
+           canvas.addEventListener("mouseup", listener);
+           canvas.addEventListener("mousemove", listener);
+           canvas.addEventListener("mouseout", listener);
+         };
+
+         function listener(event){
+           switch (event.type) {
+             case "mousedown":
+               initDraw(event);
+               break;
+             case "mousemove":
+               if(pos.drawable)
+                 draw(event);
+               break;
+             case "mouseout":
+             case "mouseup":
+               finishDraw();
+               break;
+
+           }
+         }
+
+         function initDraw(event){
+           ctx.beginPath();
+           pos.drawable = true;
+           var coors = getPosition(event);
+           pos.X = coors.X;
+           pos.Y = coors.Y;
+           ctx.moveTo(pos.X, pos.Y);
+         }
+
+         function draw(event){
+           var coors = getPosition(event);
+           ctx.lineTo(coors.X, coors.Y);
+           pos.X = coors.X;
+           pos.Y = coors.Y;
+           ctx.stroke();
+         }
+
+         function finishDraw(){
+           pos.drawable = false;
+           pos.X = -1;
+           pos.Y = -1;
+
+
+
+
+         }
+
+         function getPosition(event){
+           var x = event.pageX - canvas.offsetLeft ;
+           var y = event.pageY - canvas.offsetTop - 180;
+           return {X: x, Y: y};
+         }
+         function clearCanvas()
+         {
+             ctx.clearRect(0, 0, canvas.width, canvas.height);
+             ctx.beginPath();
+
+         }
+         function imagedata_to_image(imagedata) {
+             image = canvas.toDataURL('image/png');
+             return image;
+         }
+
+         </script>
+    <script src="../public/chattingPage.js"></script>
+
+</body>
+
+</html>

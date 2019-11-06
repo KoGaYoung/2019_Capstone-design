@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8"></meta>
+    <link rel="stylesheet" type="text/css" href="./css/chattingPage.css">
+  </head>
+
+  <body>
+    <div class="itemsDiv">
+    <div class="backgroundDiv">
+
+      <div class="headerDiv">
+        <img class="logoDiv" src="./css/conversationLogo.png" ></img>
+        <p class="headerText">Sketch-Based Chat</p>
+      </div>
+
+
+      <div class="containerDiv">
+        <!--채팅로그-->
+        <!-- <textarea id="chatLog" class="chat_Log" readonly></textarea> -->
+        <div id="chatLog" class="chat_Log">
+          <!-- 채팅 메시지 영역 -->
+          <!-- 텍스트 및 이미지가 올라감 -->
+        </div>
+
+        <div class="chatFormat" id="chat">
+          <input id="message" class="message" type="text" placeholder=" 메시지를 입력하세요." autocomplete="off"/ >
+          <button class="chat" onclick="send()">전송</button>
+          <input type="button" class="skatchStart" onClick="showPopUp()"/>
+        </div>
+      </div>
+    </div>
+    <div id = "side" class='wrapper' style="visibility= hidden;">
+         <div class='top'>
+             <div class='recommend'>
+               <div class="text_recommend">
+                 Recommend
+               </div>
+             </div>
+
+             <div class="image_table">
+               <div class='image_container'>
+<<<<<<< HEAD
+                 <img id= "recommend_0" src= "./css/conversationLogo.png" onclick="focus_img('recommend_0')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_1" src="./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_2" src="./css/conversationLogo.png" onclick="focus_img('recommend_2')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_3" src= "./css/conversationLogo.png" onclick="focus_img('recommend_3')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_4" src= "./css/conversationLogo.png" onclick="focus_img('recommend_4')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_5" src= "./css/conversationLogo.png" onclick="focus_img('recommend_5')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_6" src= "./css/conversationLogo.png" onclick="focus_img('recommend_6')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_7" src= "./css/conversationLogo.png" onclick="focus_img('recommend_7')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_8" src= "./css/conversationLogo.png" onclick="focus_img('recommend_8')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_9" src= "./css/conversationLogo.png" onclick="focus_img('recommend_9')">
+=======
+                 <img id= "recommend_1" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_2" src="./css/conversationLogo.png" onclick="focus_img('recommend_2')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_3" src="./css/conversationLogo.png" onclick="focus_img('recommend_3')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_4" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_5" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_6" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_7" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_8" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_9" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+               </div>
+               <div class='image_container'>
+                 <img id= "recommend_10" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+               </div>
+             </div>
+         </div>
+
+         <div class="draw">
+               <!-- canvas -->
+           <canvas id="cnvs" width="550px" height="420px"></canvas>
+         </div>
+
+         <div class="buttons">
+           <button  id= "btnDel" class="cancel">cancel</button>
+           <button  class="send" onclick="sendImg('recommend_1')">send</button>
+               <!-- <div class="cancel">cancel</div> -->
+         </div>
+     </div>
+  </div>
+
+
+
+          <script src = "/socket.io/socket.io.js"></script>
+          <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+          <script>
+          function imge_to_canvas(recommend_id){
+
+            var cnvs = document.getElementById('cnvs');
+            var img = document.getElementById(recommend_id);
+            var ctx = cnvs.getContext('2d');
+
+              ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+              ctx.drawImage(img, cnvs.width/2-img.width/2, cnvs.height/2-img.height/2);
+
+          }
+          function click_recommend(recommend_id){
+
+
+
+
+
+          }
+          function showPopUp(){
+            var ifram = document.getElementById('side');
+            if(ifram.style.visibility=='hidden'){
+              ifram.style.visibility = 'visible';
+            }else{
+              ifram.style.visibility='hidden';
+            }
+          }
+          </script>
+
+          <script>
+          //클라이언트 코드
+          var socket = io()
+
+          /* 접속 되었을 때 실행 */
+          socket.on('connect', function() {
+          /* 이름을 입력받고 */
+          // var name = prompt('반갑습니다!', '')
+
+          /* 이름이 빈칸인 경우 */
+          // if(!name) {
+          //   name = '익명'
+          // }
+          var name = "익명"
+          /* 서버에 새로운 유저가 왔다고 알림 */
+          socket.emit('newUser', name)
+          })
+
+          /* 서버로부터 데이터 받은 경우 */
+          socket.on('update', function(data) {
+
+
+          var chat = document.getElementById('chatLog')
+          var user_name = document.getElementById('name')
+          var message = document.createElement('div')
+          // var br = document.createElement('\n');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+          //image 전달할경우
+          if(data.type == 'image'){
+            var node =  document.createElement("IMG");
+            node.setAttribute("src", data.buffer);
+            node.setAttribute("width", "100");
+            node.setAttribute("height", "100");
+          }
+          else{
+
+            var node = document.createTextNode(`${data.name}: ${data.message}`)
+
+          }
+
+          var className = ''
+
+          // 타입에 따라 적용할 클래스를 다르게 지정
+          switch(data.type) {
+            case 'image':
+              className = 'other'
+              break
+            case 'message':
+              className = 'other'
+              break
+
+            case 'connect':
+              className = 'connect'
+              break
+
+            case 'disconnect':
+              className = 'disconnect'
+              break
+          }
+
+          message.classList.add(className)
+          message.appendChild(node)
+<<<<<<< HEAD
+          var msg_wrapper = document.createElement('div')
+          msg_wrapper.className ='msg_wrapper'
+          msg_wrapper.appendChild(message)
+          chat.appendChild(msg_wrapper)
+=======
+
+          chat.appendChild(message)
+          // chat.appendChild('\n')
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+
+          })
+
+          socket.on('update_re', function(data) {
+            console.log(data)
+
+            chage_recommend(data)
+
+          })
+          // 추천 이미지 클릭시 변수에 id 값을 저장하여 send시 저장된 id의 이미즈를 채팅으로 전달한다.
+          //img_id default = recommend_1
+          let img_id = 'recommend_1';
+
+          function focus_img(recommend_img){
+            //추천 이미지 클릭시 선택한 이미지 id 저장
+
+            if(recommend_img != img_id){
+              var focus_img = document.getElementById(img_id);
+              focus_img.style.opacity = 1;
+            }
+            var focus_img = document.getElementById(recommend_img);
+            focus_img.style.opacity = 0.5;
+            img_id = recommend_img;
+
+
+          }
+
+          function sendImg() {
+          // 입력되어있는 데이터 가져오기
+          // var image_canvas = document.getElementById('cnvs')
+          // var image =  cnvs.toDataURL()
+          var image = document.getElementById(img_id)
+          var image_data_url = image.src;
+
+          var send_img =  document.createElement("IMG");
+          send_img.setAttribute("src", image_data_url);
+          send_img.setAttribute("width", "100");
+          send_img.setAttribute("height", "100");
+
+          // 가져왔으니 데이터 빈칸으로 변경
+          // 내가 전송할 메시지 클라이언트에게 표시
+          var chat = document.getElementById('chatLog')
+          var msg = document.createElement('div')
+          msg.classList.add('me')
+          msg.appendChild(send_img)
+<<<<<<< HEAD
+=======
+          chat.appendChild(msg)
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+          // var br = document.createElement("br");
+          // chat.appendChild(br)
+          // 서버로 message 이벤트 전달 + 데이터와 함께
+          socket.emit('image', { type: 'image',  buffer: send_img.src})
+          }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+          //enter로 채팅 전송하는 함수
+         document.getElementById('message').addEventListener('keydown',function(event){
+           if(event.keyCode == 13 && document.getElementById('message').value !=""){
+             event.preventDefault();
+             send();
+           }
+         });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+          /* 메시지 전송 함수 */
+          function send() {
+          // 입력되어있는 데이터 가져오기
+          var message = document.getElementById('message').value
+          if(document.getElementById('message').value !=""){
+            // 내가 전송할 메시지 클라이언트에게 표시
+            var chat = document.getElementById('chatLog')
+            var msg = document.createElement('div')
+<<<<<<< HEAD
+            var msg_wrapper = document.createElement('div')
+            msg_wrapper.className ='msg_wrapper'
+=======
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+            var node = document.createTextNode(message)
+            // var br = document.createElement("br");
+            msg.classList.add('me')
+            msg.appendChild(node)
+<<<<<<< HEAD
+            msg_wrapper.appendChild(msg)
+            chat.appendChild(msg_wrapper)
+            // chat.appendChild(br)
+            // 서버로 message 이벤트 전달 + 데이터와 함께
+            socket.emit('message', {type: 'message', message: message})
+          }
+          // 가져왔으니 데이터 빈칸으로 변경
+          document.getElementById('message').value = ''
+=======
+            chat.appendChild(msg)
+            // chat.appendChild(br)
+
+            // 서버로 message 이벤트 전달 + 데이터와 함께
+            socket.emit('message', {type: 'message', message: message})
+
+          }
+          // 가져왔으니 데이터 빈칸으로 변경
+          document.getElementById('message').value = ''
+
+>>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+          }
+
+          function draw_end(data_url){
+            socket.emit('recommend', {type : 'image', buffer : data_url})
+          }
+          function chage_recommend(img_list){
+            console.log("chage_recommend")
+
+
+            var recommend_list = img_list.split(',')
+            var re_1 = document.getElementById('recommend_1')
+            var re_2 = document.getElementById('recommend_2')
+            var re_3 = document.getElementById('recommend_3')
+
+            console.log("./data/"+recommend_list[0]+".png")
+            console.log("./data/"+recommend_list[1]+".png")
+            console.log("./data/"+recommend_list[2]+".png")
+
+            re_1.src = "./data/"+recommend_list[0]+".png"
+            re_2.src = "./data/"+recommend_list[1]+".png"
+            re_3.src = "./data/"+recommend_list[2]+".png"
+
+
+          }
+        // 그림판 코드
+        $(document).ready(function(){
+            // canvas
+            var cnvs = document.getElementById('cnvs');
+            var ctx = cnvs.getContext('2d');
+
+            // canvas 사용가능
+            if (cnvs.getContext) {
+                // 캔버스 컨텍스트
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, cnvs.width, cnvs.height);
+                // 그리기 모드인지 체크하는 변수
+                var isDraw = false;
+
+                // 그리기 옵션
+                var dot = 2;
+                var color = 'rgb(0, 0, 0)';
+
+                // 그리기 옵션 - 도트크기
+                $('#dot').bind('change', function(){  dot = $('#dot').val(); });
+                // 그리기 옵션 - 색깔
+                $('#color').bind('change', function(){ color = $('#color').val(); });
+
+                // 이벤트 핸들러 연결
+                $('#cnvs').mousemove(function(e){
+                    // 그릴 수 있으면 그린다.
+                    if (isDraw) draw(e);
+                });
+                $('#cnvs').mousedown(function(e){
+                    // 왼쪽 버튼 down 이면 그릴 수 있다고 선언
+                    if (e.button===0) {
+                        isDraw = true;
+                        draw(e);
+                    }
+                });
+                $('#cnvs').mouseup(function(e){
+                    // 버튼 up 이면 그릴 수 없다고 선언
+                    // 지금 까지 그린 canvas data convert image data and send socket
+                    isDraw = false;
+                    ctx.beginPath();
+                    // cavas 값을 toDataURL로 만든후 이미지를 전달하여 추천이미지 값들을 받을수 있도록 만든다.
+                    var image = cnvs.toDataURL("image/png")
+                    // var imgDataTest = ctx.createImageData(cnvs.width, cnvs.height);
+                    // var image = new Image();
+                    // image.src = cnvs.toDataURL('image/png');
+                    // var image = cnvs.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    // window.location.href=image;
+
+
+
+
+                    // var img_list = "./css/camera.png,./css/photoPlus.png,./css/conversationLogo.png"
+                    draw_end(image)
+
+                    // chage_recommend(img_list)
+
+                });
+
+                // 그리기
+                function draw(e)
+                {
+                    ctx.fillStyle = color;
+                    // ctx.fillRect(e.offsetX, e.offsetY, dot, dot);
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.stroke();
+
+                }
+
+                // 지우기
+                function clearCanvas()
+                {
+                    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+                    ctx.beginPath();
+
+                }
+                $("#btnDel").click(function(){ clearCanvas()});
+
+            // canvas 사용불가
+            } else {
+                alert('canvas가 지원되지 않는 브라우저입니다. 구글 크롬을 권장합니다.');
+                return;
+            }
+
+        });
+
+        </script>
+  </body>
+
+</html>

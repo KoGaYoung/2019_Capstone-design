@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/index.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+<script>
+
+$(document).ready(function(){
+    // canvas
+    var cnvs = document.getElementById('cnvs');
+    // canvas 사용가능
+    if (cnvs.getContext) {
+        // 캔버스 컨텍스트
+        var ctx = cnvs.getContext('2d');
+        ctx.fillStyle = 'rgb(255, 255, 255)';
+        ctx.fillRect(0, 0, cnvs.width, cnvs.height);
+        // 그리기 모드인지 체크하는 변수
+        var isDraw = false;
+
+        // 그리기 옵션
+        var dot = 2;
+        var color = 'rgb(0, 0, 0)';
+
+        // 그리기 옵션 - 도트크기
+        $('#dot').bind('change', function(){  dot = $('#dot').val(); });
+        // 그리기 옵션 - 색깔
+        $('#color').bind('change', function(){ color = $('#color').val(); });
+
+        // 이벤트 핸들러 연결
+        $('#cnvs').mousemove(function(e){
+            // 그릴 수 있으면 그린다.
+            if (isDraw) draw(e);
+        });
+        $('#cnvs').mousedown(function(e){
+            // 왼쪽 버튼 down 이면 그릴 수 있다고 선언
+            if (e.button===0) {
+                isDraw = true;
+                draw(e);
+            }
+        });
+        $('#cnvs').mouseup(function(e){
+            // 버튼 up 이면 그릴 수 없다고 선언
+            // 지금 까지 그린 canvas data convert image data and send socket
+            isDraw = false;
+            var imgDataTest = ctx.createImageData(cnvs.width, cnvs.height);
+            // var image = new Image();
+            // image.src = cnvs.toDataURL('image/png');
+            // var image = cnvs.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            // window.location.href=image;
+            var image = cnvs.toDataURL("image/png")
+            // image.download
+            alert("sdssdsdsd")
+
+        });
+
+        // 그리기
+        function draw(e)
+        {
+            ctx.fillStyle = color;
+            ctx.fillRect(e.offsetX, e.offsetY, dot, dot);
+        }
+
+        // 지우기
+        function clearCanvas()
+        {
+            ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+            ctx.beginPath();
+
+            localStorage.removeItem('imgData');
+        }
+        function saveImg()
+          {
+              var imgData = ctx.getImageData(0, 0, cnvs.width, cnvs.height);
+              var strData = '';
+              for (var i=0; i<imgData.length; i+=4) {
+                  strData += imgData[i]+'|'+imgData[i+1]+'|'+imgData[i+2]+'|';
+              }
+              localStorage.setItem('imgData', strData);
+          }
+        $("#btnDel").click(function(){ clearCanvas()});
+
+    // canvas 사용불가
+    } else {
+        alert('canvas가 지원되지 않는 브라우저입니다. 구글 크롬을 권장합니다.');
+        return;
+    }
+
+});
+</script>
+<script>
+
+function imagedata_to_image(imagedata) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = imagedata.width;
+    canvas.height = imagedata.height;
+    ctx.putImageData(imagedata, 0, 0);
+
+    var image = new Image();
+    image.src = canvas.toDataURL('image/png');
+    return image;
+}
+</script>
+</head>
+
+<body>
+
+<div>
+    <canvas id="cnvs" width="300" height="300" style="border: 1px solid black;"></canvas>
+    <br />
+    <div>
+      <button id ="btnDel">delete</button>
+    </div>
+
+</div>
+
+</body>
+</html>

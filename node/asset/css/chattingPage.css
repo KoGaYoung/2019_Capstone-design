@@ -1,0 +1,281 @@
+/*-------------layout---------------*/
+.itemsDiv{
+  height: 900px;
+  display: flex; /*chat and draw 수평 쌓기*/
+  align-items: center; /*수직정렬*/
+  justify-content: center; /*수평정렬*/
+}
+/* 채팅 배경 */
+.backgroundDiv{
+  width: 880px;
+  height: 590px;
+  background-color: #f0f0f0;
+  border: 1px solid #797979;
+  min-width: 500px;
+  min-height: 450px;
+}
+/* 채팅 헤더 */
+.headerDiv{
+  height: 10%;
+  background-color: #9bbbd4;
+  border:1px solid #bcbcbc;
+}
+/*채팅로고*/
+.logoDiv{
+  width: 5%;
+  margin-left: 3%;/*로고 여유*/
+  vertical-align: middle; /*성허위치맞추기*/
+  background-size: contain;  /*배경을 사용하는 요소를 벗어나지 않는 최대 크기로 이미지를 확대 또는 축소합니다. 가로 세로 비율을 유지합니다. */
+  display: absolute; /*test중*/
+}
+/*sketch based chat*/
+.headerText{
+  font-size: 2vw;  /*가로기준 10vw는 1%*/
+  font-weight: bold;
+  color: #556677;
+  vertical-align: middle;  /*로고 글씨 가운데*/
+  display: inline;
+}
+/*채팅 컨텐츠*/
+.containerDiv{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /*수직*/
+}
+/*채팅 로그*/
+.chat_Log{
+  width: 70%;
+  height: 420px;
+  background-color: #9bbbd4;
+  margin-top: 3%;
+  box-shadow:3px 3px 3px 2px #bcbcbc;/*수평오프셋, 수직오프셋, 흐림세기, 퍼짐정도*/
+  overflow-y:auto; /*채팅 일정이상 쌓이면 스크롤바*/
+  overflow-x: hidden; /*좌우 스크롤 안보이게*/
+  /* min-width: 350px; */
+}
+
+/*스크롤바*/
+::-webkit-scrollbar {
+  width: 12px; /*세로축 스크롤바 길이*/
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  width: 12px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+   background: rgba(0,0,0,.1);
+}
+
+/*채팅 입력 부분*/
+.chatFormat{
+  width: 70%; /*chatting log는 textarea임*/
+  height: 40px;
+  margin-bottom: 5%;
+  background-color: white;
+  box-shadow: 3px 3px 3px 2px #bcbcbc;
+  display: flex;
+  align-items: center; /*수직정렬*/
+}
+/*채팅 입력칸*/
+.message{
+  width: 75%;
+  height: 90%;
+  border: 0px;
+  font-size: 1.2vw;
+}
+/*전송버튼*/
+.chat{
+  width: 12%;
+  height: 80%;
+  color: #ffffff;
+  background-color: #BBBBBB;
+  border: 1px solid #797979;
+  border-radius: 6px;
+  font-size: 1.2vw;
+  margin-left: 2%;
+<<<<<<< HEAD
+}
+/*캔버스 열고닫기 버튼*/
+.skatchStart{
+  width: 8%;
+  height: 90%;
+  background: url( "picture.png" ) no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+  margin-left: 1.5%;
+}
+
+/* 접속 알림 */
+.connect {
+  display: inline-block;
+  width: 100%;
+  padding-left: 10px;
+  /* margin: auto; */
+  background-color: #a9bdce;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* 접속 종료 알림 */
+.disconnect {
+  display: inline-block;
+   width: 100%;
+  margin: auto;
+   background-color: #a9bdce;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* 내가 보낸 메시지 */
+.me {
+  position: relative;
+  width: auto;
+  background-color: #F7E600;
+  padding: 1%; /*테두리 여백*/
+  max-width: 50%; /*50%넘으면 줄바꿈되도록*/
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  float:right;
+}
+/*말풍선 꼬리*/
+.me:after {
+  content: " ";
+  position: absolute;
+  border: solid transparent;
+	left: 100%;
+	top: 70%;
+  border-left-color: #F7E600;
+  border-width: 5px;
+  margin-top: -5px;
+}
+
+/* 상대방이 보낸 메시지 */
+.other {
+  position: relative;
+  width: auto;
+  background-color: white;
+  padding:1%;
+  max-width: 50%;
+  /* margin: auto; */
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float:left;
+}
+/*말풍선 꼬리*/
+.other:after {
+  content: " ";
+  position: absolute;
+  border: solid transparent;
+	right: 100%;
+	top: 70%;
+  border-right-color: #ffffff;
+  border-width: 5px;
+  margin-top: -5px;
+}
+
+/*-------------캔버스------------*/
+.wrapper{
+  display: table;
+  width: 550px;
+  max-width: 550px;
+  height: 590px;
+  border: 1px solid #797979;
+  background-color:#F0F0F0;
+  margin-left: 10px;
+}
+
+.recommend{
+  width: 100%;
+  height: 10%;
+  background:#9BBBD4;
+}
+
+.recommend > div{
+  width: 100%;
+   height: 10%;
+   color: #556677;
+   /*가로기준 10vw는 1%*/
+   font-size: 2vw;
+   font-weight: bold;
+   /* 폰트 적용 안됨 */
+   font-family: Britannic;
+   display: flex;
+   text-align: center;
+   margin-left: 3%;/*로고 여유*/
+
+}
+
+.image_table{
+  display: table-row;
+}
+
+.image_container{
+  display: table-cell;
+<<<<<<< HEAD
+  width: 10%;
+  height: 10%;
+=======
+  width: 55px;
+  height: 55px;
+>>>>>>> origin/dev_heo
+  text-align: center;
+  border-bottom: 1px solid #797979;
+}
+
+.image_container img{
+  width: 100%;
+   height: 100%;
+}
+
+.draw{
+  width: 100%;
+   height: 420px;
+   /* background-color:#ffffff; */
+   position:relative;
+}
+
+.buttons{
+  border-top: 1px solid #797979;
+  height: 20%;
+  background-color: #9bbbd4;
+  display:table-row;
+}
+.cancel, .send{
+  float:right;
+  width: 12%;
+  height: 80%;
+  color: #ffffff;
+  background-color: #BBBBBB;
+  border: 1px solid #797979;
+  border-radius: 6px;
+  font-size: 1vw;
+  margin-top: 1%;
+  margin-right: 2%;
+}
+<<<<<<< HEAD
+
+=======
+.msg_wrapper {
+  display : block;
+  width : 100%;
+}
+>>>>>>> origin/dev_heo
+@media (max-width: 880px){
+  .backgroundDiv{
+    width: auto;
+    height: auto;
+  }
+  .chat_Log{
+      float: none;
+    }
+}
+@media (max-width: 550px){
+  .wrapper{
+    width: auto;
+    height: auto;
+  }
+}

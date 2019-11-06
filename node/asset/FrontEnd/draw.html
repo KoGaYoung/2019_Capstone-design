@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <link rel="stylesheet" href="../public/drawpage.css">
+  <head>
+    <meta charset="utf-8">
+    <title>draw page</title>
+  </head>
+  <body>
+    <div class='wrapper'>
+       <div class='top'>
+           <div class='recommend'>
+             <div class="text_recommend">
+               Recommend
+             </div>
+           </div>
+
+           <div class="image_table">
+             <div class='image_container'> Recommend1
+               <!-- <img src="resource/test_image1.png"> -->
+             </div>
+             <div class='image_container'> Recommend2
+               <!-- <img src="resource/test_image2.png"> -->
+             </div>
+             <div class='image_container'> Recommend3
+               <!-- <img src="resource/test_image3.png"> -->
+             </div>
+           </div>
+       </div>
+       <div class="draw">
+         <!-- canvas -->
+         <canvas id="canvas" width="960px" height="705px"></canvas>
+         <div class="buttons">
+           <div class="send">send</div>
+             <button id="trash_b"onclick="clearCanvas()">delete</button>
+
+           <div class="cancel">cancel</div>
+
+
+         </div>
+       </div>
+
+    </div>
+    <script src="canvas.js"></script>
+  </body>
+</html>

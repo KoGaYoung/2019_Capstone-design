@@ -1,0 +1,188 @@
+body{
+  /*display: inline-flex로 지정된 Flex Container는
+    Inline(Inline Block) 요소와 같은 성향(수평 쌓임)을 가짐*/display: inline-flex;
+}
+.backgroundDiv{
+  width: 800px;
+  height: 540px;
+  border : 1px solid black;
+  background-color: #f0f0f0;
+  min-width: 500px;
+  min-height: 450px;
+}
+
+.headerDiv{
+  height: 10%;
+  background-color: #9bbbd4;
+  border: 1px solid #bcbcbc;
+}
+
+.logoDiv{
+  width: 5%;
+  margin-left: 3%;
+  background: url( "conversationLogo.png" ) no-repeat;
+  display: inline;
+  /*배경을 사용하는 요소를 벗어나지 않는 최대 크기로 이미지를 확대 또는 축소합니다. 가로 세로 비율을 유지합니다. */
+  background-size: contain;
+}
+
+p.headerText{
+  display: inline;
+  /*가로기준 10vw는 1%*/
+  font-size: 2.5vw;
+  /*로고 글씨 가운데*/
+  vertical-align: super;
+}
+
+.containerDiv{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chat_Log{
+  margin-top: 3%;
+  height: 400px;
+  max-height: 80%;
+  width: 60%;
+  background-color: #9bbbd4;
+  /*수평오프셋, 수직오프셋, 흐림세기, 퍼짐정도*/
+  box-shadow:3px 3px 3px 2px #bcbcbc;
+  overflow-y:auto;
+}
+
+.chatFormat{
+  width: 60%; /*chatting log는 textarea임*/
+  height: 30%;
+  margin-bottom: 5%;
+  background-color: white;
+  box-shadow:3px 3px 3px 2px #bcbcbc;
+}
+
+.name{
+  width: 15%;
+  /*부모가 flex인경우 중앙정렬*/
+  vertical-align: middle;
+}
+
+.message{
+  width:50%;
+  vertical-align: middle;
+}
+
+.chat{
+  width:15%;
+  color: #ffffff;
+  background-color: #BBBBBB;
+  border: 1px solid #7F7F7F;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.skatchStart{
+  width:7%;
+  height: 100%;
+  border: 0px solid #7F7F7F;
+  background: url( "photoPlus.png" ) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  /* float: right; */
+  /* font-size:7px; */
+}
+
+.wrapper{
+  margin-left: 10px;
+  visibility: hidden;
+  marginwidth :  0;
+  marginheight : 0;
+  frameborder: 0;
+  scrolling : no;
+  align : left;
+  display: table;
+  width:490px;
+  height:550px;
+  border: 1px solid #797979;
+}
+
+.recommend{
+  width: 100%;
+  height: 10%;
+  background-color:#9BBBD4;
+}
+
+.recommend > div{
+  width: 100%;
+  height: 10%;
+  color: #556677;
+  /*가로기준 10vw는 1%*/
+  font-size: 2.5vw;
+  font-weight: bold;
+  /* 폰트 적용 안됨 */
+  font-family: Britannic;
+
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+}
+
+.image_table{
+  display: table-row;
+}
+
+.image_container{
+  display: table-cell;
+  width: 160px;
+  height: 160px;
+  text-align: center;
+  border: 1px solid #797979;
+}
+
+.image_container img{
+  width: 160px;
+  height: 160Spx;
+}
+
+.draw{
+  width:100%;
+  height:352.5px;
+  background-color:#F0F0F0;
+  position:relative;
+}
+
+.buttons{
+  display: table-row;
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  border-spacing: 15px 0px;
+  margin-bottom: 20px;
+}
+
+.buttons > div{
+  display: table-cell;
+  height: 50px;
+  width: 50px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  border: 1px solid #797979;
+}
+.send{
+  background: url( "send.png" ) no-repeat;
+    background-size: contain;
+}
+.trash{
+  background: url( "trash.png" ) no-repeat;
+    background-size: contain;
+}
+.cancel{
+    background: url( "cancel.png" ) no-repeat;
+      background-size: contain;
+}
+
+@media (max-width:800px){
+  .backgroundDiv{
+    width: auto;
+    height: auto;
+  }
+}
