@@ -41,7 +41,6 @@
 
              <div class="image_table">
                <div class='image_container'>
-<<<<<<< HEAD
                  <img id= "recommend_0" src= "./css/conversationLogo.png" onclick="focus_img('recommend_0')">
                </div>
                <div class='image_container'>
@@ -70,36 +69,7 @@
                </div>
                <div class='image_container'>
                  <img id= "recommend_9" src= "./css/conversationLogo.png" onclick="focus_img('recommend_9')">
-=======
-                 <img id= "recommend_1" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_2" src="./css/conversationLogo.png" onclick="focus_img('recommend_2')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_3" src="./css/conversationLogo.png" onclick="focus_img('recommend_3')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_4" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_5" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_6" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_7" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_8" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_9" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
-               </div>
-               <div class='image_container'>
-                 <img id= "recommend_10" src= "./css/conversationLogo.png" onclick="focus_img('recommend_1')">
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+
                </div>
              </div>
          </div>
@@ -175,10 +145,7 @@
           var user_name = document.getElementById('name')
           var message = document.createElement('div')
           // var br = document.createElement('\n');
-<<<<<<< HEAD
-=======
 
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
           //image 전달할경우
           if(data.type == 'image'){
             var node =  document.createElement("IMG");
@@ -214,16 +181,11 @@
 
           message.classList.add(className)
           message.appendChild(node)
-<<<<<<< HEAD
           var msg_wrapper = document.createElement('div')
           msg_wrapper.className ='msg_wrapper'
           msg_wrapper.appendChild(message)
           chat.appendChild(msg_wrapper)
-=======
 
-          chat.appendChild(message)
-          // chat.appendChild('\n')
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
 
           })
 
@@ -269,19 +231,13 @@
           var msg = document.createElement('div')
           msg.classList.add('me')
           msg.appendChild(send_img)
-<<<<<<< HEAD
-=======
           chat.appendChild(msg)
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
           // var br = document.createElement("br");
           // chat.appendChild(br)
           // 서버로 message 이벤트 전달 + 데이터와 함께
           socket.emit('image', { type: 'image',  buffer: send_img.src})
           }
-<<<<<<< HEAD
-=======
 
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
           //enter로 채팅 전송하는 함수
          document.getElementById('message').addEventListener('keydown',function(event){
            if(event.keyCode == 13 && document.getElementById('message').value !=""){
@@ -289,11 +245,7 @@
              send();
            }
          });
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
           /* 메시지 전송 함수 */
           function send() {
           // 입력되어있는 데이터 가져오기
@@ -302,16 +254,13 @@
             // 내가 전송할 메시지 클라이언트에게 표시
             var chat = document.getElementById('chatLog')
             var msg = document.createElement('div')
-<<<<<<< HEAD
             var msg_wrapper = document.createElement('div')
             msg_wrapper.className ='msg_wrapper'
-=======
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
+
             var node = document.createTextNode(message)
             // var br = document.createElement("br");
             msg.classList.add('me')
             msg.appendChild(node)
-<<<<<<< HEAD
             msg_wrapper.appendChild(msg)
             chat.appendChild(msg_wrapper)
             // chat.appendChild(br)
@@ -320,18 +269,7 @@
           }
           // 가져왔으니 데이터 빈칸으로 변경
           document.getElementById('message').value = ''
-=======
-            chat.appendChild(msg)
-            // chat.appendChild(br)
 
-            // 서버로 message 이벤트 전달 + 데이터와 함께
-            socket.emit('message', {type: 'message', message: message})
-
-          }
-          // 가져왔으니 데이터 빈칸으로 변경
-          document.getElementById('message').value = ''
-
->>>>>>> 9430a96d16b9481700c8d37b9985142d62ef3ddd
           }
 
           function draw_end(data_url){

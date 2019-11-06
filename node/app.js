@@ -41,7 +41,7 @@ function make_option(data){
 // app.use('/js', express.static('node/asset/js'))
 // app.use('/data', express.static('node/asset/data'))
 
-원래꺼
+// 원래꺼
 app.use('/css', express.static('./asset/css'))
 app.use('/js', express.static('./asset/js'))
 app.use('/data', express.static('./asset/data'))
