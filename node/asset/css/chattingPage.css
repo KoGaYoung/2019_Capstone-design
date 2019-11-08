@@ -132,6 +132,7 @@
 .me {
   position: relative;
   width: auto;
+  word-break: break-all; /*영문 줄바꿈*/
   background-color: #F7E600;
   padding: 1%; /*테두리 여백*/
   max-width: 50%; /*50%넘으면 줄바꿈되도록*/
@@ -156,6 +157,7 @@
 .other {
   position: relative;
   width: auto;
+  word-break: break-all; /*영문 줄바꿈*/
   background-color: white;
   padding:1%;
   max-width: 50%;
