@@ -8,20 +8,20 @@ import tensorflow as tf
 from PIL import Image, ImageOps
 
 '''
-    backup 11.07
+
     ---------- Model Configuration ----------
     |- Keras base image classification      |
-    |- Latest update : 11.05                |
-    |- LTS model : v1.53                    |
+    |- Latest update : 11.11                |
+    |- LTS model : v1.53 , v2.01            |
     |- LTS model acc : 80.54%               |
-    |- Latest model : v2.12                 |
-    |- Latest model acc : 69%               |
+    |- Latest model : v2.20                 |
+    |- Latest model acc : 78%               |
     -----------------------------------------
-    |- resize input (48,48,1)               |
+    |- resize input (64,64,1)               |
     |- Performance goal : Accuracy 85% over |
-    |- now model : v2.15                    |
+    |- now model : v3.00                    |
     |- label : 100                          | 
-    |- Update : 11.07                       | 
+    |- Update : 11.11                       | 
     -----------------------------------------
 
 '''
@@ -65,24 +65,16 @@ def createModel(numclass):
     model = Sequential()
     model.add(Conv2D(16, (3, 3), padding='same', activation='relu', input_shape=(48, 48, 1)))
     model.add(Conv2D(16, (3, 3), activation='relu'))
+    model.add(Conv2D(16, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.1))
-
-    model.add(Conv2D(32, (3, 3), padding='same', activation='relu'))
-    model.add(Conv2D(32, (3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.1))
-
-    model.add(Conv2D(8, (3, 3), padding='same', activation='relu'))
-    model.add(Conv2D(8, (3, 3), activation='relu'))
-    model.add(Dropout(0.1))  # 0.25 -> 0.1
 
     model.add(Flatten())
-
     model.add(Dense(700, activation='relu'))
-    model.add(Dense(500, activation='relu'))
+    model.add(Dropout(0.15))
+    model.add(Dense(512, activation='relu'))
+    model.add(Dropout(0.15))
     model.add(Dense(256, activation='relu'))
-    # model.add(Dense(128, activation='relu'))
+    model.add(Dropout(0.15))
     model.add(Dense(numclass, activation='softmax'))  # label count = dense label.
 
     return model
@@ -90,6 +82,7 @@ def createModel(numclass):
 
 def recommand(predictions, class_dict):
     # Recommend top 3 -> 10
+
     predictions = predictions[0].tolist()
     predict = []
     for i in range(len(predictions)):
@@ -156,8 +149,8 @@ def main():
         model1.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
         print("Training....")
-        history = model1.fit_generator(train_gen, steps_per_epoch=5000, epochs=200, validation_data=valid_gen,
-                                       validation_steps=100)
+        history = model1.fit_generator(train_gen, steps_per_epoch=2000, epochs=100,
+                                       validation_data=valid_gen, validation_steps=80)
         # 10000 / 200 next 30000 100 or 5000 / 300
 
         # Saving model
@@ -214,7 +207,7 @@ def main():
     # pred  -> not imagedatagenerator.
     image_size = (48, 48)
 
-    img = Image.open('/home/mll/Capstone/predict_image/pred/asd.png')
+    img = Image.open('/home/mll/Capstone/predict_image/pred/lion?.png')
     img = img.resize(image_size, Image.ANTIALIAS)
     img = img.convert('L')  # L
     inv_image = ImageOps.invert(img)

@@ -21,7 +21,7 @@ def folder_list(file_path):
         label_list.append(data_folder)
         print(folder)
         #build fix folder
-        target_path = '/home/mll/Capstone/fix_image_set'
+        target_path = '/home/mll/Capstone/image_data/fix_image_set_label_100_48,48,6000'
         print("{} to {} dataset...".format(target_path, data_folder))
         os.mkdir(target_path + "/train/" + data_folder )
         os.mkdir(target_path + "/valid/" + data_folder)
@@ -47,7 +47,7 @@ def folder_list(file_path):
                 save_image.save(target_path + "/test/" + data_folder + "/" + imagefile, quality=100)
             elif (count > 6500 and count <= 7000):
                 save_image.save(target_path + "/valid/" + data_folder + "/" + imagefile, quality=100)
-                
+                '''
             # image 6600
             if (count < 6000):
                 save_image.save(target_path + "/train/" + data_folder + "/" + imagefile, quality=100)
@@ -55,14 +55,16 @@ def folder_list(file_path):
                 save_image.save(target_path + "/test/" + data_folder + "/" + imagefile, quality=100)
             elif (count >= 6500 and count < 6600):
                 save_image.save(target_path + "/valid/" + data_folder + "/" + imagefile, quality=100)    
-            '''
+
             # image 15000
+            '''
             if (count < 13000):
                 save_image.save(target_path + "/train/" + data_folder + "/" + imagefile, quality=100)
             elif (count >= 13000 and count < 14000):
                 save_image.save(target_path + "/test/" + data_folder + "/" + imagefile, quality=100)
             elif (count >= 14000 and count < 15000):
                 save_image.save(target_path + "/valid/" + data_folder + "/" + imagefile, quality=100)
+            '''
 
 
             image.close()
@@ -75,8 +77,8 @@ def folder_list(file_path):
 def main():
 
     print("Image rorate start...")
-    folder_list("/home/mll/Capstone/image_set")
 
-
+    folder_list("/home/mll/Capstone/image_data/image_set_label100_unresize")
+    #folder_list("/home/mll/Capstone/image_data/label_100_lateset/image_set")
 if __name__ == "__main__":
     main()
