@@ -51,7 +51,6 @@ Ex. ADD : First Registration #1
 설명은 명령문으로 간결하게, 이슈번호는 이슈에서 찾아서 #번호로 작성
 
 ### 3.2 작품 수상내역
-<img src="https://user-images.githubusercontent.com/36693355/69471500-f147b580-0de2-11ea-980d-0eddaea469c1.jpg"/>
 
 - 오픈소스 어워드 입상   
 - 강원 ICT분야 SW작품 및 창의 아이디어 경진대회 ICT분야 SW작품 **우수상**  
